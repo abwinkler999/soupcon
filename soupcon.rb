@@ -1,4 +1,4 @@
 require 'sinatra'
 get '/' do
-  erb :foo
+  erb :soupcon
 end
