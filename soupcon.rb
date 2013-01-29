@@ -13,10 +13,10 @@ def readRecipe
       if recipeFile
         @xmlDoc = Plist::parse_xml(recipeFile)
         # for some reason, creates array with one element -- the hash
-        @resultingHash = @xmlDoc[0]
-        #puts @resultingHash.class
-        @resultingHash["RecipeName"] = some_recipe.to_s
-        #puts @resultingHash["RecipeName"]
+        @recipe = @xmlDoc[0]
+        #puts @recipe.class
+        @recipe["RecipeName"] = some_recipe.to_s
+        #puts @recipe["RecipeName"]
       else
         puts "File could not be opened!"
       end
@@ -31,17 +31,18 @@ def returnSomething
    # returnString << "Object Type: " + elem.class.to_s + " Name: " + elem +  " Key: " + elem.keys.to_s +  " Value: " + elem.values.to_s + "\n\r"
   #end
   #puts Plist::Emit.dump(@xmlDoc)
-  returnString << "<h1>" + @resultingHash["name"] + "</h1>"
-  @resultingHash.each {|key, value|
-    if key == "directions"
-      returnString << '<div id="directions">' + value + '</div>'
-    else
-      returnString << "<p>#{key} : #{value} </p>"
-    end
-  }
+  returnString << "<h1>" + @recipe["name"] + "</h1>"
+  returnString << '<div id="directions">' + @recipe["directions"] + '</div>'
+  #@recipe.each {|key, value|
+  #  if key == "directions"
+  #    returnString << '<div id="directions">' + value + '</div>'
+  #  else
+  #    returnString << "<p>#{key} : #{value} </p>"
+  #  end
+  
   return returnString
-  #return "<p>Attribution: " + @resultingHash['attribution'] + "</p><p>Directions: " + @resultingHash['directions'] + "</p>" + @resultingHash['cuisine']
-  #return @resultingHash.inspect
+  #return "<p>Attribution: " + @recipe['attribution'] + "</p><p>Directions: " + @recipe['directions'] + "</p>" + @recipe['cuisine']
+  #return @recipe.inspect
 
   #return "!"
 end
