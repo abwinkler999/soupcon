@@ -44,5 +44,4 @@ def returnSomething
   #return "<p>Attribution: " + @recipe['attribution'] + "</p><p>Directions: " + @recipe['directions'] + "</p>" + @recipe['cuisine']
   #return @recipe.inspect
 
-  #return "!"
 end
