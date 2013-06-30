@@ -9,12 +9,10 @@
     <h1>Recipes Index</h1>
     <%loadRecipesList%>
     <ul>
-    <%@recipesList.each { |x| %>
-      <li>
-      <%=x%>
-    </li>
-    <%}%>
-  </ul>
+      <%@recipesList.each { |x| %>
+        <li><%=x%></li>
+      <%}%>
+    </ul>
 
   </body>
 </html>
