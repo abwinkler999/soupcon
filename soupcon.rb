@@ -6,6 +6,24 @@ get '/' do
   erb :soupcon
 end
 
+def loadRecipesList
+  @recipesList = []
+  Dir.foreach("assets") { |some_recipe|
+    if some_recipe.include? ".ysr"
+      recipeFile = File.new("assets/" + some_recipe);
+      if recipeFile
+        @xmlDoc = Plist::parse_xml(recipeFile)
+        @xmlDoc.each { |x|
+          @recipesList << x["name"]
+        }
+      else
+        @recipesList << "No recipes found!"
+      end
+    end
+  }
+  #return @recipesList
+end
+
 def readRecipe
   Dir.foreach("assets") { |some_recipe|
     if some_recipe.include? ".bak"
@@ -16,7 +34,7 @@ def readRecipe
         @recipe = @xmlDoc[0]
         #puts @recipe.class
         @recipe["RecipeName"] = some_recipe.to_s
-        #puts @recipe["RecipeName"]
+        @recipe.each { |x, y| puts "#{x} is #{y}"}
       else
         puts "File could not be opened!"
       end

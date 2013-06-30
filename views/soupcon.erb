@@ -2,11 +2,19 @@
   <head>
     <title>YummySoup Viewer</title>
     <link href='http://fonts.googleapis.com/css?family=Oxygen+Mono' rel='stylesheet' type='text/css'>
-    <link href="css/viewer_page.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 1024px)" href="css/fire.css" />
+    <link href="css/browser.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 1024px)" href="css/kindle_fire.css" />
   </head>
   <body>
-  <%=readRecipe%>
-  <%=returnSomething%>
+    <h1>Recipes Index</h1>
+    <%loadRecipesList%>
+    <ul>
+    <%@recipesList.each { |x| %>
+      <li>
+      <%=x%>
+    </li>
+    <%}%>
+  </ul>
+
   </body>
 </html>
