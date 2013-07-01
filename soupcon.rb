@@ -6,23 +6,32 @@ get '/' do
   erb :soupcon
 end
 
-get '/:recipe_id' do
-  @recipe = @xmlDoc[params[:recipe_id]]
+get '/recipes/:recipe_id' do
+  i = params[:recipe_id]
+  puts @xmlDoc.inspect
+  @recipe = @xmlDoc["Foo"]
   erb :recipe
 end
 
+# TO DO:  @xmlDoc is apparently loading a hash of all recipes.  For the index page, soupcon is extracting a list of all
+# "name" key-value pairs and just rendering them into an array of names.  Useful to display, but doesn't point back to
+# the original hash.  What is needed is to take the hash and turn it into an array of hashes (i.e. each recipe becomes
+# an array entry).  Then the array index will point to an individual recipe.
+
+
 def loadRecipesList
-  @recipesList = []
+  @recipeNamesList = []
   Dir.foreach("assets") { |some_recipe|
     if some_recipe.include? ".ysr"
       recipeFile = File.new("assets/" + some_recipe);
       if recipeFile
         @xmlDoc = Plist::parse_xml(recipeFile) #hash of all recipes
         @xmlDoc.each { |x|
-          @recipesList << x["name"]
+          @recipeNamesList << x["name"]
+          puts x["name"]
         }
       else
-        @recipesList << "No recipes found!"
+        @recipeNamesList << "No recipes found!"
       end
     end
   }
