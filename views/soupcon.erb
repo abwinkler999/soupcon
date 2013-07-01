@@ -9,8 +9,8 @@
     <h1>Recipes Index</h1>
     <%loadRecipesList%>
     <ul>
-      <%@recipesList.each { |x| %>
-        <li><%=x%></li>
+      <%@recipesList.each_index { |x| %>
+        <li><a href=<%=x.to_s + ">" + @recipesList[x]%></a></li>
       <%}%>
     </ul>
 
