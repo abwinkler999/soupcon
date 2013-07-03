@@ -3,6 +3,7 @@ require 'sinatra'
 require 'plist'
 require 'better_errors'
 
+# replace this eventually with a proper PostgreSQL backend
 before do
   loadRecipesList
 end
@@ -11,20 +12,12 @@ get '/' do
   erb :soupcon
 end
 
+#this crashes when trying to render recipe.erb for reasons as yet unknown
 get '/recipes/:recipe_id' do
   i = params[:recipe_id].to_i
-  #puts "************ ---------->" + i.class.to_s
-  #puts "************ ---------->" + @recipes.class.to_s
-  #puts @xmlDoc.inspect
   @recipe = @recipes[i]
-  erb :foo
+  erb :recipe
 end
-
-# TO DO:  @xmlDoc is apparently loading a hash of all recipes.  For the index page, soupcon is extracting a list of all
-# "name" key-value pairs and just rendering them into an array of names.  Useful to display, but doesn't point back to
-# the original hash.  What is needed is to take the hash and turn it into an array of hashes (i.e. each recipe becomes
-# an array entry).  Then the array index will point to an individual recipe.
-
 
 def loadRecipesList
   #@recipeNamesList = []
@@ -36,11 +29,6 @@ def loadRecipesList
         @xmlDoc = Plist::parse_xml(recipeFile) #hash of all recipes
         @xmlDoc.each { |x|
           @recipes << x
-          #@recipeNamesList << x["name"]
-          #puts x["name"]
-          #puts "***************"
-          #puts x
-          #puts "***************"
         }
       else
         #@recipeNamesList << "No recipes found!"
@@ -48,10 +36,9 @@ def loadRecipesList
     end
   }
   puts "Recipes array size: "+ @recipes.length.to_s
-  #puts "Recipes item no. 7: " + @recipes[6].to_s
-  #return @recipesList
 end
 
+# DEPRECATED
 def readRecipe
   Dir.foreach("assets") { |some_recipe|
     if some_recipe.include? ".bak"
@@ -70,13 +57,8 @@ def readRecipe
   }
 end
 
-def returnSomething
+def displayRecipe
   returnString = ""
-  #returnString = Array.new
-  # @xmlDoc.xpath('//*').each do |elem|
-   # returnString << "Object Type: " + elem.class.to_s + " Name: " + elem +  " Key: " + elem.keys.to_s +  " Value: " + elem.values.to_s + "\n\r"
-  #end
-  #puts Plist::Emit.dump(@xmlDoc)
   returnString << "<h1>" + @recipe["name"] + "</h1>"
   returnString << '<div id="directions">' + @recipe["directions"] + '</div>'
   #@recipe.each {|key, value|
@@ -87,7 +69,4 @@ def returnSomething
   #  end
   
   return returnString
-  #return "<p>Attribution: " + @recipe['attribution'] + "</p><p>Directions: " + @recipe['directions'] + "</p>" + @recipe['cuisine']
-  #return @recipe.inspect
-
 end
