@@ -1,16 +1,23 @@
 require 'sinatra'
 #require 'nokogiri'
 require 'plist'
+require 'better_errors'
+
+before do
+  loadRecipesList
+end
 
 get '/' do
   erb :soupcon
 end
 
 get '/recipes/:recipe_id' do
-  i = params[:recipe_id]
+  i = params[:recipe_id].to_i
+  #puts "************ ---------->" + i.class.to_s
+  #puts "************ ---------->" + @recipes.class.to_s
   #puts @xmlDoc.inspect
   @recipe = @recipes[i]
-  erb :recipe
+  erb :foo
 end
 
 # TO DO:  @xmlDoc is apparently loading a hash of all recipes.  For the index page, soupcon is extracting a list of all
@@ -41,7 +48,7 @@ def loadRecipesList
     end
   }
   puts "Recipes array size: "+ @recipes.length.to_s
-  puts "Recipes item no. 7: " + @recipes[6].to_s
+  #puts "Recipes item no. 7: " + @recipes[6].to_s
   #return @recipesList
 end
 
