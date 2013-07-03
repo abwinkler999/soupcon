@@ -8,8 +8,8 @@ end
 
 get '/recipes/:recipe_id' do
   i = params[:recipe_id]
-  puts @xmlDoc.inspect
-  @recipe = @xmlDoc["Foo"]
+  #puts @xmlDoc.inspect
+  @recipe = @recipes[i]
   erb :recipe
 end
 
@@ -20,21 +20,28 @@ end
 
 
 def loadRecipesList
-  @recipeNamesList = []
+  #@recipeNamesList = []
+  @recipes = []
   Dir.foreach("assets") { |some_recipe|
     if some_recipe.include? ".ysr"
       recipeFile = File.new("assets/" + some_recipe);
       if recipeFile
         @xmlDoc = Plist::parse_xml(recipeFile) #hash of all recipes
         @xmlDoc.each { |x|
-          @recipeNamesList << x["name"]
-          puts x["name"]
+          @recipes << x
+          #@recipeNamesList << x["name"]
+          #puts x["name"]
+          #puts "***************"
+          #puts x
+          #puts "***************"
         }
       else
-        @recipeNamesList << "No recipes found!"
+        #@recipeNamesList << "No recipes found!"
       end
     end
   }
+  puts "Recipes array size: "+ @recipes.length.to_s
+  puts "Recipes item no. 7: " + @recipes[6].to_s
   #return @recipesList
 end
 
