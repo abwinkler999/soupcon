@@ -12,9 +12,9 @@
       <h2>Ingredients</h2>
       <ul>
         <%= #@recipe["ingredientsArray"].split(";").inspect %>
-        <% @recipe["ingredientsArray"].split(";").each |x| { %>
+        <% #@recipe["ingredientsArray"].split(";").each |x| { %>
         <li>
-          <%= "x.to_s" %>
+          <%= #"x.to_s" %>
         </li>
         <% } %>
       </ul>
