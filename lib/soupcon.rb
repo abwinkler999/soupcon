@@ -62,17 +62,3 @@ def readRecipe
     end
   }
 end
-
-def displayRecipe
-  returnString = ""
-  returnString << "<h1>" + @recipe["name"] + "</h1>"
-  returnString << '<div id="directions">' + @recipe["directions"] + '</div>'
-  #@recipe.each {|key, value|
-  #  if key == "directions"
-  #    returnString << '<div id="directions">' + value + '</div>'
-  #  else
-  #    returnString << "<p>#{key} : #{value} </p>"
-  #  end
-  
-  return returnString
-end

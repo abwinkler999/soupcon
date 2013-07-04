@@ -6,6 +6,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
+    <%= erb :header %>
     <h1>Recipes Index</h1>
     <ul>
       <% @recipes.each_index { |x| %>

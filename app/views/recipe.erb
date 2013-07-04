@@ -2,11 +2,28 @@
   <head>
     <title>YummySoup Viewer</title>
     <link href='http://fonts.googleapis.com/css?family=Oxygen+Mono' rel='stylesheet' type='text/css'>
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 1024px)" href="css/kindle_fire.css" />
   </head>
   <body>
+  <%= erb :header %>
+  <div class = "row">
+    <div class="span3 well">
+      <h2>Ingredients</h2>
+      <ul>
+        <%= #@recipe["ingredientsArray"].split(";").inspect %>
+        <% @recipe["ingredientsArray"].split(";").each |x| { %>
+        <li>
+          <%= "x.to_s" %>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+    <div class="span9">
   <%= "<h1>" + @recipe["name"] + "</h1>" %>
+  <%= "<p class='lead'>" + @recipe["recipeDescription"] + "</p>" %>
   <%= "<div id='directions'>" + @recipe["directions"] + "</div>" %>
+    </div>
+  </div>
   </body>
 </html>
