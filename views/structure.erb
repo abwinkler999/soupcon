@@ -9,7 +9,7 @@
 <ul>
   <% @recipe.each { |x, y| %>
     <li>
-      <%= "Key: " + x.to_s %>
+      <%= "Key: <strong>" + x.to_s + "</strong>" %>
     <br>
       <%= "Value: " + y.to_s %>
     </li>

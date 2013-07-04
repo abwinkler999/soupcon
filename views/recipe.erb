@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 1024px)" href="css/kindle_fire.css" />
   </head>
   <body>
-  <%= displayRecipe %>
-
+  <%= "<h1>" + @recipe["name"] + "</h1>" %>
+  <%= "<div id='directions'>" + @recipe["directions"] + "</div>" %>
   </body>
 </html>
