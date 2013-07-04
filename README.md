@@ -10,8 +10,6 @@ It is deployed at soupcon.herokuapp.com.
 
 TO DO LIST
 
-* recipe index with proper routing to individual recipes
-
 * restructure views in partials, with tabs along top and index or recipe displayed below
 
 * at the moment, input is in a flat XML file read in with Plist.  Application would be a great deal more
