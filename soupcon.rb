@@ -12,11 +12,16 @@ get '/' do
   erb :soupcon
 end
 
-#this crashes when trying to render recipe.erb for reasons as yet unknown
 get '/recipes/:recipe_id' do
   i = params[:recipe_id].to_i
   @recipe = @recipes[i]
   erb :recipe
+end
+
+get '/structure/:recipe_id' do
+  i = params[:recipe_id].to_i
+  @recipe = @recipes[i]
+  erb :structure
 end
 
 def loadRecipesList
