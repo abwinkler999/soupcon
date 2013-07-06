@@ -11,8 +11,12 @@
     <div class="span3 well">
       <h2>Ingredients</h2>
       <ul>
-        <li>Placeholder 1</li>
-        <li>Placeholder 2</li>
+        <li>
+          <% x = @recipe["ingredientsArray"].delete! "()" %>
+          <% ingredients = x.split (",") %>
+          <%= ingredients[3] %>
+        </li>
+
       </ul>
     </div>
     <div class="span9">
