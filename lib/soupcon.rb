@@ -44,6 +44,18 @@ def loadRecipesList
   }
 end
 
+#ingredients are stored in a peculiar format.  Need to convert these to displayable strings.
+def parseIngredient(raw)
+  name = ""
+  quantity = 0
+  measurement = ""
+  prep_method = ""
+  jooky = raw.tr('=', ':')
+  puts jooky
+  jooky.eval
+  raw
+end
+
 # DEPRECATED
 def readRecipe
   Dir.foreach("assets") { |some_recipe|

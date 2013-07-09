@@ -14,7 +14,7 @@
         <li>
           <% x = @recipe["ingredientsArray"].delete! "()" %>
           <% ingredients = x.split (",") %>
-          <%= ingredients[4] %>
+          <%= parseIngredient(ingredients[0]) %>
         </li>
 
       </ul>
