@@ -50,10 +50,14 @@ def parseIngredient(raw)
   quantity = 0
   measurement = ""
   prep_method = ""
-  jooky = raw.tr('=', ':')
-  puts jooky
-  jooky.eval
-  raw
+  jooky = raw.tr('=', ',')
+  jooky = jooky.tr!(';', ',')
+  jooky = jooky.tr!('{', ' ')
+  jooky = jooky.tr!('}', ' ')
+  jooky.strip!.slice!(-1)
+  result = jooky.split(',')
+  puts result.inspect
+  jooky
 end
 
 # DEPRECATED
