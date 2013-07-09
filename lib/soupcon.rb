@@ -50,14 +50,43 @@ def parseIngredient(raw)
   quantity = 0
   measurement = ""
   prep_method = ""
+
   jooky = raw.tr('=', ',')
+  if jooky.class != String
+      puts "*******************"
+      puts jooky.class
+  end
   jooky = jooky.tr!(';', ',')
   jooky = jooky.tr!('{', ' ')
   jooky = jooky.tr!('}', ' ')
   jooky.strip!.slice!(-1)
   result = jooky.split(',')
-  puts result.inspect
-  jooky
+  result.each { |x| 
+    x.tr!('""', ' ')
+    x.strip!
+  }
+  result_hash = Hash[*result.flatten]
+
+  result_string = ""
+  result_hash.delete_if {|key, value| value == ""}
+  if result_hash.has_key?("quantity")
+    result_string << result_hash["quantity"] + " "
+  end
+  
+  if result_hash.has_key?("measurement")
+    result_string << result_hash["measurement"] + " "
+  end
+  
+  if result_hash.has_key?("name")
+    result_string << result_hash["name"]
+  end
+  
+  if result_hash.has_key?("method")
+    result_string << ", " + result_hash["method"]
+  end
+  
+  return result_string
+
 end
 
 # DEPRECATED

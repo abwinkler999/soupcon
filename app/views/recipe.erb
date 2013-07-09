@@ -11,10 +11,13 @@
     <div class="span3 well">
       <h2>Ingredients</h2>
       <ul>
-        <li>
           <% x = @recipe["ingredientsArray"].delete! "()" %>
           <% ingredients = x.split (",") %>
-          <%= parseIngredient(ingredients[0]) %>
+          <% ingredients.each { |x| %>
+            <li>
+          <%= parseIngredient(x).to_s %>
+        </li>
+          <% } %>
         </li>
 
       </ul>
